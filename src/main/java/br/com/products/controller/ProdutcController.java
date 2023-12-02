@@ -21,6 +21,9 @@ import br.com.products.model.Product;
 import br.com.products.repository.ProductRepository;
 import jakarta.validation.Valid;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 @RequestMapping("/product")
 public class ProdutcController {
@@ -30,11 +33,18 @@ public class ProdutcController {
 	
 	@GetMapping
 	public ResponseEntity<List<Product>> findAll(){
-		return ResponseEntity.status(HttpStatus.OK).body(repository.findAll());
+		List<Product> productsList = repository.findAll();
+		if(!productsList.isEmpty()) {
+			for(Product product : productsList) {
+				Long id = product.getId();
+				product.add(linkTo(methodOn(ProdutcController.class).getOneProduct(id)).withSelfRel());
+			}
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(productsList);
 	}
 	
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<Object> findById(@PathVariable(value = "id") Long id){
+	@GetMapping("/{id}")
+	public ResponseEntity<Object> getOneProduct(@PathVariable(value = "id") Long id){
 		Optional<Product> productO = repository.findById(id);
 		if(productO.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
 		return ResponseEntity.status(HttpStatus.OK).body(productO.get());
@@ -59,7 +69,7 @@ public class ProdutcController {
 		
 	}
 	
-	@DeleteMapping(value = "/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteProduct(@PathVariable(value = "id") Long id){
 		Optional<Product> productO = repository.findById(id);
 		if(productO.isEmpty()) return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
