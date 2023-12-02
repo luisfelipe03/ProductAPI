@@ -3,8 +3,8 @@ package br.com.products.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,22 +19,22 @@ public class Product implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private UUID id;
+	@Column
+	private Long id;
+	
+	@Column
 	private String name;
+	
+	@Column
 	private BigDecimal value;
+	
+	
 
-	public Product(UUID id, String name, BigDecimal value) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.value = value;
-	}
-
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
