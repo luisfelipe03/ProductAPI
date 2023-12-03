@@ -1,5 +1,12 @@
 # API de Produtos
 
+## Tecnologias usadas no projeto
+
+<img align="center" alt="Felipe-java" height="60" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg"> -
+<img align="center" alt="Felipe-java" height="60" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original-wordmark.svg"> -
+<img align="center" alt="Felipe-java" height="60" width="60" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-plain-wordmark.svg" />
+
+
 ## Visão Geral
 
 Esta é uma API REST simples usando Spring Boot para gerenciar produtos. A API oferece suporte a operações CRUD básicas (Criar, Ler, Atualizar, Excluir) para produtos. Ela utiliza o Spring Data JPA para persistência de dados e HATEOAS para fornecer links de hipermídia.
