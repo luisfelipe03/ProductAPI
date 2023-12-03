@@ -40,6 +40,7 @@ public class ProdutcController {
 				product.add(linkTo(methodOn(ProdutcController.class).getOneProduct(id)).withSelfRel());
 			}
 		}
+		//Teste branch
 		return ResponseEntity.status(HttpStatus.OK).body(productsList);
 	}
 	
